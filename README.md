@@ -23,14 +23,14 @@ Netinstall, make USB install disk with unetbootin. Deselect desktop environment.
 	# must be done before installing wireless
 	# comment out the added rep again
 	sudo aptitude update
-	reboot
+	sudo reboot
 
 ### Wireless
 
 	sudo nano /etc/apt/sources.list
 	# add "contrib" and "non-free" to main rep
 	sudo aptitude install broadocom-sta-dkms
-	reboot
+	sudo reboot
 
 ### settings
 
@@ -50,7 +50,8 @@ Netinstall, make USB install disk with unetbootin. Deselect desktop environment.
 
 ### bluetooth (might cause screen flicker?)
 	
-	# install binary driver?
+	# copy BCM20702A0-0a5c-216f.hcd to /lib/firmware/brcm/
+	sudo reboot
 	sudo aptitude install blueman
 
 ### spotify
