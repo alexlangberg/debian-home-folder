@@ -40,7 +40,9 @@ Netinstall, make USB install disk with unetbootin. Deselect desktop environment.
 
 ### i3
 
-	sudo aptitude install xorg i3 i3status dmenu suckless-tools
+	sudo aptitude install xorg i3 i3status dmenu suckless-tools dunst
+	sudo update-alternatives --config dmenu
+	# select XFT font support
 
 ### utilities
 	
