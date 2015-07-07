@@ -55,7 +55,7 @@ Netinstall, make USB install disk with unetbootin. Deselect desktop environment.
 
 ### utilities
 	
-	sudo aptitude install terminus transmission xdotool lxappearance redshift pavucontrol thunar thunar-volman thunar-archive-plugin xfce4-screenshooter xfce4-taskmanager
+	sudo aptitude install xfce4-terminal xfce4-screenshooter xfce4-taskmanager transmission xdotool lxappearance redshift-gtk pavucontrol thunar thunar-volman thunar-archive-plugin
 
 ### spotify
 
