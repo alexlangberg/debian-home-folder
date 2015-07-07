@@ -1,0 +1,315 @@
+# place in ~/.i3
+
+# Should you change your keyboard layout some time, delete
+# this file and re-run i3-config-wizard(1).
+
+set $mod Mod4
+
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+ae focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+ae move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ae resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Below here by alexlangberg
+ 
+# start dmenu (a program launcher)
+ bindsym $mod+d exec dmenu_run -b -nb '#000000' -nf '#aaaaaa' -sb '#4D679a' -sf '#ffffff' -fn 'Ubuntu 13'
+ 
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+ 
+bar {
+	#output DP1-2-1
+	position top
+	tray_output primary
+        status_command i3status -c ~/.i3/.i3status.conf
+	font pango:Ubuntu 13
+	colors {
+		background #000000
+		statusline #383a3b
+		separator #222222
+ 
+		focused_workspace  #4d679a #4d679a #ffffff
+		active_workspace   #4d679a #4d679a #ffffff
+		inactive_workspace #000000 #000000 #aaaaaa
+		urgent_workspace   #2f343a #900000 #ffffff
+	}
+}
+ 
+mouse_warping none
+hide_edge_borders both
+font pango:Ubuntu 13
+
+# class                 border  backgr. text    indicator
+client.focused          #4d679a #4d679a #ffffff #2e9ef4
+client.focused_inactive #383a3b #383a3b #ffffff #484e50
+client.unfocused        #383a3b #383a3b #ffffff #292d2e
+client.urgent           #4d679a #900000 #ffffff #900000
+ 
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+ 
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+ 
+# assign applications to workspaces
+#assign [class="jetbrains-phpstorm" title="/PhpStorm/"] 5
+ 
+# custom stuff for windows
+#for_window [class="jetbrains-phpstorm" title="^Terminal$"] floating disable, move container to workspace 6
+#for_window [class="jetbrains-phpstorm" title="^Project$"] floating disable, move container to workspace 6
+#for_window [class="jetbrains-phpstorm" title="^Database$"] floating disable, move container to workspace 6
+#for_window [class="jetbrains-phpstorm" title="^Changes$"] floating disable, move container to workspace 6
+#for_window [class="jetbrains-phpstorm" title="^REST Client$"] floating disable, move container to workspace 6
+ 
+# startup applications
+exec --no-startup-id xsetroot -solid '#000000'
+exec --no-startup-id nm-applet
+exec --no-startup-id ~/.i3/pa-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id redshift-gtk
+exec --no-startup-id megasync
+#exec --no-startup-id --tray wicd-gtk
+#exec --no-startup-id xfce4-power-manager
+#exec --no-startup-id xfce4-taskmanager
+#exec --no-startup-id remmina
+#exec --no-startup-id transmission-gtk
+
+# touchpad settings
+exec synclient HorizTwoFingerScroll=1
+exec synclient HorizEdgeScroll=1
+exec synclient VertScrollDelta=-75
+exec synclient HorizScrollDelta=-75
+ 
+# turn off screensaver and standby
+#exec xset -dpms
+#exec xset s noblank
+#exec xset s 0 0
+#exec xset s off
+
+# screen setup
+exec "xrandr --newmode 1920x1080_DELLU2414H  148.4  1920 2008 2052 2200  1080 1084 1089 1125  +HSync +Vsync"
+exec "xrandr --addmode DP1-2-2 1920x1080_DELLU2414H"
+
+bindsym $mod+Shift+Control+KP_1 exec "/home/alj/.i3/screenlayout_laptop.sh"
+bindsym $mod+Shift+Control+KP_2 exec "/home/alj/.i3/screenlayout_docked.sh"
+bindsym $mod+Shift+Control+KP_3 exec "/home/alj/.i3/screenlayout_docked_triple.sh"
+
+bindsym $mod+Shift+Control+a exec "xrandr --output eDP1    --off"
+bindsym $mod+Shift+Control+s exec "xrandr --output DP1-1   --off"
+bindsym $mod+Shift+Control+d exec "xrandr --output DP1-2-1 --off"
+bindsym $mod+Shift+Control+f exec "xrandr --output DP1-2-2 --off"
+
+#bindsym $mod+Shift+Control+q exec "xrandr --output eDP1    --auto"
+#bindsym $mod+Shift+Control+w exec "xrandr --output DP1-1   --mode 1920x1080 --rate 59.9 --pos 0x0      --rotate left"
+#bindsym $mod+Shift+Control+e exec "xrandr --output DP1-2-1 --mode 1920x1080 --rate 59.9 --pos 1080x310 --rotate normal --primary"
+#bindsym $mod+Shift+Control+r exec "xrandr --output DP1-2-2 --mode 1920x1080_DELLU2414H  --pos 3000x0   --rotate right"
+ 
+# custom hotkeys
+bindsym $mod+Shift+Control+Delete exec "dm-tool lock && sudo pm-suspend"
+#bindsym $mod+Shift+Control+Delete exec "i3lock -c 000055 && sudo pm-suspend"
+#bindsym $mod+Shift+Control+Delete exec "dm-tool lock && systemctl suspend"
+bindsym Shift+Control+Delete exec gnome-system-monitor
+bindsym Print exec xfce4-screenshooter
+ 
+# spotify hotkeys
+bindsym XF86AudioPlay exec ~/.i3/spotify_hotkeys.sh play
+bindsym XF86AudioPrev exec ~/.i3/spotify_hotkeys.sh prev
+bindsym XF86AudioNext exec ~/.i3/spotify_hotkeys.sh next
+ 
+# display and workspace setup
+# use "xrandr --query" to see available outputs
+ 
+# switch to workspace, keypad
+bindsym $mod+KP_1 workspace 1
+bindsym $mod+KP_4 workspace 4
+bindsym $mod+KP_7 workspace 7
+
+bindsym $mod+KP_0 workspace 0
+bindsym $mod+KP_2 workspace 2
+bindsym $mod+KP_5 workspace 5
+bindsym $mod+KP_8 workspace 8
+bindsym $mod+KP_Divide workspace 10
+bindsym $mod+KP_Multiply workspace 11
+
+bindsym $mod+KP_3 workspace 3
+bindsym $mod+KP_6 workspace 6
+bindsym $mod+KP_9 workspace 9
+ 
+# move focused container to workspace
+bindsym $mod+Shift+KP_0 move container to workspace 0
+bindsym $mod+Shift+KP_1 move container to workspace 1
+bindsym $mod+Shift+KP_2 move container to workspace 2
+bindsym $mod+Shift+KP_3 move container to workspace 3
+bindsym $mod+Shift+KP_4 move container to workspace 4
+bindsym $mod+Shift+KP_5 move container to workspace 5
+bindsym $mod+Shift+KP_6 move container to workspace 6
+bindsym $mod+Shift+KP_7 move container to workspace 7
+bindsym $mod+Shift+KP_8 move container to workspace 8
+bindsym $mod+Shift+KP_9 move container to workspace 9
+bindsym $mod+Shift+KP_Divide move container to workspace 10
+bindsym $mod+Shift+KP_Multiply move container to workspace 11
+
+# Pulse Audio controls
+#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
+#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
+#bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 2 -time 0 && notify-send "  + " # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 2 -time 0 && notify-send "  - " # decrease screen brightness
+
+# Touchpad controls
+#bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+#bindsym XF86AudioPlay exec playerctl play
+#bindsym XF86AudioPause exec playerctl pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
+
+# home monitors
+workspace 0 output eDP1
+
+workspace 1 output DP1-1
+workspace 4 output DP1-1
+workspace 7 output DP1-1
+
+workspace 2 output DP1-2-1
+workspace 5 output DP1-2-1
+workspace 8 output DP1-2-1
+workspace 10 output DP1-2-1
+workspace 11 output DP1-2-1
+ 
+workspace 3 output DP1-2-2
+workspace 6 output DP1-2-2
+workspace 9 output DP1-2-2
+
+# work computer
+#workspace 1 output DFP13
+#workspace 4 output DFP13
+#workspace 7 output DFP13
+ 
+#workspace 0 output DFP9
+#workspace 2 output DFP9
+#workspace 5 output DFP9
+#workspace 8 output DFP9
+#workspace 10 output DFP9
+#workspace 11 output DFP9
+ 
+#workspace 3 output DFP1
+#workspace 6 output DFP1
+#workspace 9 output DFP1
