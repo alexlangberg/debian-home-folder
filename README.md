@@ -45,17 +45,16 @@ Netinstall, make USB install disk with unetbootin. Deselect desktop environment.
 
 	sudo aptitude install git
 	git clone https://github.com/alexlangberg/debian-home-folder.git
-	# install ubuntu font from .deb folder
 
 ### bluetooth (might cause screen flicker?)
 	
 	# copy BCM20702A0-0a5c-216f.hcd to /lib/firmware/brcm/
+	sudo aptitude install blueman pulseaudio pulseaudio-module-bluetooth bluez-audio pavucontrol bluez-firmware bluez-tools
 	sudo reboot
-	sudo aptitude install blueman
 
 ### utilities
 	
-	sudo aptitude install xfce4-terminal xfce4-screenshooter xfce4-taskmanager transmission xdotool lxappearance redshift-gtk pavucontrol thunar thunar-volman thunar-archive-plugin
+	sudo aptitude install xfce4-terminal xfce4-screenshooter xfce4-taskmanager thunar thunar-volman thunar-archive-plugin transmission xdotool lxappearance redshift-gtk pavucontrol
 
 ### spotify
 
