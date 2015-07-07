@@ -21,6 +21,9 @@ Netinstall, make USB install disk with unetbootin. Deselect desktop environment.
 	apt-get search linux-image
 	# find newest kernel version and install, along with headers
 	# must be done before installing wireless
+	# comment out the added rep again
+	sudo aptitude update
+	reboot
 
 ### Wireless
 
@@ -33,6 +36,7 @@ Netinstall, make USB install disk with unetbootin. Deselect desktop environment.
 
 	sudo aptitude install git
 	git clone https://github.com/alexlangberg/debian-home-folder.git
+	# install ubuntu font from .deb folder
 
 ### i3
 
@@ -40,9 +44,9 @@ Netinstall, make USB install disk with unetbootin. Deselect desktop environment.
 
 ### utilities
 	
-	sudo aptitude install terminus transmission xdotool lxappearance redshift pavucontrol thunar thunar-volman thunar-archive-plugin xfce4-screenshooter xfce4-taskmanager
+	sudo aptitude install wicd-curses terminus transmission xdotool lxappearance redshift pavucontrol thunar thunar-volman thunar-archive-plugin xfce4-screenshooter xfce4-taskmanager
 
-### bluetooth
+### bluetooth (might cause screen flicker?)
 	
 	# install binary driver?
 	sudo aptitude install blueman
@@ -55,7 +59,3 @@ Install libcrypt11 from .deb folder, then:
 	echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 	sudo apt-get update
 	sudo apt-get install spotify-client
-
-### ubuntu font
-
-Install from .deb folder.
