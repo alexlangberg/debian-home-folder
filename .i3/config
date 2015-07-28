@@ -125,17 +125,19 @@ bindsym $mod+r mode "resize"
 # Below here by alexlangberg
  
 # start dmenu (a program launcher)
- bindsym $mod+d exec dmenu_run -b -nb '#000000' -nf '#aaaaaa' -sb '#4D679a' -sf '#ffffff' -fn 'Ubuntu 13'
+ bindsym $mod+d exec --no-startup-id dmenu_run -b -nb '#000000' -nf '#aaaaaa' -sb '#4D679a' -sf '#ffffff' -fn 'Open Sans'-20
  
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+
+exec xrandr	--output eDP1 --primary
  
 bar {
-	#output DP1-2-1
+	#output eDP1
 	position top
 	tray_output primary
         status_command i3status -c ~/.i3/.i3status.conf
-	font pango:Ubuntu 13
+	font pango:Open Sans 14
 	colors {
 		background #000000
 		statusline #383a3b
@@ -150,7 +152,7 @@ bar {
  
 mouse_warping none
 hide_edge_borders both
-font pango:Ubuntu 13
+font pango:Open Sans 14
 
 # class                 border  backgr. text    indicator
 client.focused          #4d679a #4d679a #ffffff #2e9ef4
@@ -176,23 +178,20 @@ bindsym $mod+minus scratchpad show
 #for_window [class="jetbrains-phpstorm" title="^REST Client$"] floating disable, move container to workspace 6
  
 # startup applications
-exec --no-startup-id xsetroot -solid '#000000'
-exec --no-startup-id nm-applet
-exec --no-startup-id ~/.i3/pa-applet
+#exec --no-startup-id xsetroot -solid '#000000'
 exec --no-startup-id blueman-applet
 exec --no-startup-id redshift-gtk
+# exec --no-startup-id volumeicon
+exec --no-startup-id ~/.i3/pa-applet
+# exec --no-startup-id xss-lock -- i3lock -c 4d679a &
 exec --no-startup-id megasync
-#exec --no-startup-id --tray wicd-gtk
-#exec --no-startup-id xfce4-power-manager
-#exec --no-startup-id xfce4-taskmanager
-#exec --no-startup-id remmina
-#exec --no-startup-id transmission-gtk
+
 
 # touchpad settings
-exec synclient HorizTwoFingerScroll=1
-exec synclient HorizEdgeScroll=1
-exec synclient VertScrollDelta=-75
-exec synclient HorizScrollDelta=-75
+exec --no-startup-id synclient HorizTwoFingerScroll=1
+exec --no-startup-id synclient HorizEdgeScroll=1
+exec --no-startup-id synclient VertScrollDelta=-75
+exec --no-startup-id synclient HorizScrollDelta=-75
  
 # turn off screensaver and standby
 #exec xset -dpms
@@ -202,7 +201,7 @@ exec synclient HorizScrollDelta=-75
 
 # screen setup
 exec "xrandr --newmode 1920x1080_DELLU2414H  148.4  1920 2008 2052 2200  1080 1084 1089 1125  +HSync +Vsync"
-exec "xrandr --addmode DP1-2-2 1920x1080_DELLU2414H"
+exec "xrandr --addmode DP4 1920x1080_DELLU2414H"
 
 bindsym $mod+Shift+Control+KP_1 exec "/home/alj/.i3/screenlayout_laptop.sh"
 bindsym $mod+Shift+Control+KP_2 exec "/home/alj/.i3/screenlayout_docked.sh"
@@ -219,16 +218,14 @@ bindsym $mod+Shift+Control+f exec "xrandr --output DP1-2-2 --off"
 #bindsym $mod+Shift+Control+r exec "xrandr --output DP1-2-2 --mode 1920x1080_DELLU2414H  --pos 3000x0   --rotate right"
  
 # custom hotkeys
-bindsym $mod+Shift+Control+Delete exec "dm-tool lock && sudo pm-suspend"
-#bindsym $mod+Shift+Control+Delete exec "i3lock -c 000055 && sudo pm-suspend"
-#bindsym $mod+Shift+Control+Delete exec "dm-tool lock && systemctl suspend"
-bindsym Shift+Control+Delete exec gnome-system-monitor
-bindsym Print exec xfce4-screenshooter
+bindsym $mod+Shift+Control+Delete exec --no-startup-id "/home/alj/.i3/suspend.sh"
+bindsym Shift+Control+Delete exec --no-startup-id xfce4-taskmanager
+bindsym Print exec --no-startup-id xfce4-screenshooter
  
 # spotify hotkeys
-bindsym XF86AudioPlay exec ~/.i3/spotify_hotkeys.sh play
-bindsym XF86AudioPrev exec ~/.i3/spotify_hotkeys.sh prev
-bindsym XF86AudioNext exec ~/.i3/spotify_hotkeys.sh next
+bindsym XF86AudioPlay exec --no-startup-id ~/.i3/spotify_hotkeys.sh play
+bindsym XF86AudioPrev exec --no-startup-id ~/.i3/spotify_hotkeys.sh prev
+bindsym XF86AudioNext exec --no-startup-id ~/.i3/spotify_hotkeys.sh next
  
 # display and workspace setup
 # use "xrandr --query" to see available outputs
@@ -238,7 +235,7 @@ bindsym $mod+KP_1 workspace 1
 bindsym $mod+KP_4 workspace 4
 bindsym $mod+KP_7 workspace 7
 
-bindsym $mod+KP_0 workspace 0
+# bindsym $mod+KP_0 workspace 0
 bindsym $mod+KP_2 workspace 2
 bindsym $mod+KP_5 workspace 5
 bindsym $mod+KP_8 workspace 8
@@ -250,7 +247,7 @@ bindsym $mod+KP_6 workspace 6
 bindsym $mod+KP_9 workspace 9
  
 # move focused container to workspace
-bindsym $mod+Shift+KP_0 move container to workspace 0
+# bindsym $mod+Shift+KP_0 move container to workspace 0
 bindsym $mod+Shift+KP_1 move container to workspace 1
 bindsym $mod+Shift+KP_2 move container to workspace 2
 bindsym $mod+Shift+KP_3 move container to workspace 3
@@ -263,26 +260,12 @@ bindsym $mod+Shift+KP_9 move container to workspace 9
 bindsym $mod+Shift+KP_Divide move container to workspace 10
 bindsym $mod+Shift+KP_Multiply move container to workspace 11
 
-# Pulse Audio controls
-#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
-#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
-#bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
-
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 2 -time 0 && notify-send "  + " # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 2 -time 0 && notify-send "  - " # decrease screen brightness
-
-# Touchpad controls
-#bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-
-# Media player controls
-#bindsym XF86AudioPlay exec playerctl play
-#bindsym XF86AudioPause exec playerctl pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 2 -time 0 && notify-send "  + " # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 2 -time 0 && notify-send "  - " # decrease screen brightness
 
 # home monitors
-workspace 0 output eDP1
+# workspace 0 output eDP1
 
 workspace 1 output DP1-1
 workspace 4 output DP1-1
